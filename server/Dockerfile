@@ -10,7 +10,7 @@ COPY server/package*.json ./server/
 WORKDIR /app/server
 RUN npm install
 
-COPY server ./ 
+COPY server ./
 RUN npm run build
 
 
@@ -28,4 +28,4 @@ RUN npm install --omit=dev
 
 EXPOSE 3000
 
-CMD ["node", "dist/index.js"]
+CMD ["node", "dist/server/src/index.js"]
