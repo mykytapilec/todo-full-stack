@@ -27,4 +27,4 @@ COPY --from=builder /app/server/dist ./dist
 COPY --from=builder /app/shared ../shared
 
 EXPOSE 8080
-CMD ["node", "dist/src/index.js"]
+CMD ["node", "dist/index.js"]
