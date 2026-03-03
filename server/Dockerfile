@@ -1,31 +1,30 @@
-# ====== BUILDER ======
+# Stage 1: build backend
 FROM node:22-slim AS builder
 
 WORKDIR /app
 
+COPY server/package*.json ./server/
 COPY tsconfig.base.json ./
 COPY shared ./shared
+COPY server/tsconfig.json ./server/
 
-COPY server/package*.json ./server/
 WORKDIR /app/server
 RUN npm install
 
-COPY server ./
+COPY server ./server
+
 RUN npm run build
 
-
-# ====== RUNTIME ======
-FROM node:22-slim
-
+# Stage 2: runtime
+FROM node:22-slim AS runtime
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
-
-COPY --from=builder /app/server/dist ./dist
-COPY --from=builder /app/server/package*.json ./
-
+COPY server/package*.json ./server/
+WORKDIR /app/server
 RUN npm install --omit=dev
 
-EXPOSE 3000
+COPY --from=builder /app/server/dist ./dist
+COPY --from=builder /app/shared ../shared
 
-CMD ["node", "dist/server/src/index.js"]
+EXPOSE 8080
+CMD ["node", "dist/src/index.js"]

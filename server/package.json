@@ -18,9 +18,9 @@
     "docker:up": "npm run build && docker-compose up -d",
     "docker:down": "docker-compose down",
     "docker:logs": "docker-compose logs -f",
-    "db:start": "docker-compose up -d mongodb",
-    "db:stop": "docker-compose stop mongodb",
-    "dev:local": "npm run db:start && npm run dev"
+    "db:start": "docker-compose -f ../docker-compose.dev.yml up -d mongodb",
+    "dev:local": "npm run db:start && tsx watch src/index.ts",
+    "db:stop": "docker-compose stop mongodb"
   },
   "keywords": [
     "todo",
