@@ -1,236 +1,121 @@
-# Todo Full-Stack Application
+# 🚀 Todo Full-Stack Application
 
-A modern full-stack **todo application** with a Node.js TypeScript backend and a React TypeScript frontend.
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 
-This repository is a **personal pet project** created for learning and experimenting with modern full-stack technologies.
+A modern full-stack application for task management. This project was created as a personal pet project to experiment with microservices architecture, strict typing, and containerization.
 
 ---
 
-## Quick Start (Docker)
+## ⚡ Quick Start (Docker)
 
-The fastest way to run the project:
+The fastest way to get the entire stack up and running:
 
 ```bash
+# Copy environment variables template
 cp .env.example .env
+
+# Build and start containers
 docker compose up --build
+```
 
-### Application will be available at:
+**The application will be available at:**
+* **Frontend:** [http://localhost:3000](http://localhost:3000)
+* **Backend API:** [http://localhost:8080](http://localhost:8080)
 
-Frontend
-http://localhost:3000
+---
 
-Backend API
-http://localhost:8080
+## 🛠 Tech Stack
+
+| Layer | Technologies |
+| :--- | :--- |
+| **Frontend** | React, TypeScript, Vite |
+| **Backend** | Node.js, Express, TypeScript |
+| **Database** | MongoDB |
+| **DevOps** | Docker, Docker Compose |
+| **Testing** | Vitest, Supertest |
+
+---
 
 ## 🎯 Project Goals
 
-The main goals of this project are to:
-Practice real-world full-stack development
-Improve TypeScript usage on both frontend and backend
-Experiment with architecture, tooling, and best practices
-Gradually refactor and enhance the codebase as new concepts are learned
-Use the project as a long-term learning playground rather than a production-ready app
-
-## Project Structure
-
-This project is organized as a monorepo with separate frontend and backend applications:
-
-server/                 # Backend application
-├── src/               # Source code
-├── tests/             # Integration tests
-├── package.json       # Backend dependencies
-├── Dockerfile         # Backend container
-└── ...
-
-client/                # Frontend application
-├── src/               # React TypeScript source code
-├── package.json       # Frontend dependencies
-└── ...
-
-shared/                # Shared types used by frontend and backend
-
-docker-compose.yml     # Production Docker setup
-docker-compose.dev.yml # Development Docker setup
-
-.env.example           # Environment variables template
-README.md              # This file
-
-## Prerequisites
-
-You need the following tools installed:
-Node.js 18+
-npm
-Docker + Docker Compose
-
-Optional for local development:
-MongoDB (if not using Docker)
-Environment Variables
-
-The project uses environment variables for configuration.
-
-Create a .env file in the root of the project.
-You can copy the template:
-
-cp .env.example .env
-
-Example configuration:
-
-# Backend
-PORT=8080
-
-# MongoDB
-MONGO_URI=mongodb://db:27017/todoapp
-
-# Frontend
-VITE_API_URL=http://localhost:8080
-
-### Explanation:
-
-Variable	Description
-PORT	Backend server port
-MONGO_URI	MongoDB connection string
-VITE_API_URL	Backend API URL used by frontend
-Installation
-
-Clone the repository:
-
-git clone <repository-url>
-cd todo-full-stack
-
-Install dependencies for both server and client:
-
-npm run install:all
-
-Or manually:
-
-# Install backend dependencies
-cd server
-npm install
-
-# Install frontend dependencies
-cd ../client
-npm install
-Build
-
-Build both frontend and backend:
-
-npm run build:all
-
-Or build individually:
-
-npm run build:server
-npm run build:client
-Development
-Run Full Stack
-
-Start backend + frontend + MongoDB:
-
-npm run dev:all
-
-This will:
-
-Start MongoDB container
-
-Start backend API at
-
-http://localhost:8080
-
-Start frontend dev server at
-
-http://localhost:3000
-
-with hot reloading enabled.
-
-Run Services Separately
-
-Backend:
-
-npm run dev:backend
-
-Frontend:
-
-npm run dev:client
-
-## Docker
-
-The project includes a complete Docker setup.
-
-Services:
-
-Backend
-Frontend
-MongoDB
-
-### Run with Docker
-
-Build and start containers:
-
-docker compose up --build
-
-Application URLs:
-
-Frontend
-http://localhost:3000
-
-Backend API
-http://localhost:8080
-
-MongoDB runs inside the Docker network.
-
-Stop Containers
-
-Stop services:
-
-docker compose down
-
-Remove containers, volumes and images:
-
-docker compose down --rmi all --volumes --remove-orphans
-Development Docker Mode
-
-For development you can use:
-
-docker-compose.dev.yml
-
-Run:
-
-docker compose -f docker-compose.dev.yml up --build
-
-This mode is useful for debugging and development.
-
-Running Tests
-
-Backend tests:
-
+* **Real-world Practice:** Mastering the interaction between a React client and a Node.js server.
+* **Type Safety:** Leveraging TypeScript extensively across both frontend and backend.
+* **Architecture:** Experimenting with clean architecture and monorepo patterns.
+* **Learning Playground:** A long-term project for testing new tools, refactoring, and continuous improvement.
+
+---
+
+## 📂 Project Structure
+
+This project is organized as a monorepo with separate services:
+
+```text
+├── server/             # Backend: Express API
+│   ├── src/            # Source code
+│   ├── tests/          # Integration tests
+│   └── Dockerfile      # Backend container configuration
+├── client/             # Frontend: React Application
+│   ├── src/            # UI components and logic
+│   └── Dockerfile      # Frontend container configuration
+├── shared/             # Shared types (DTOs) used by both apps
+├── docker-compose.yml  # Main Docker setup
+└── .env.example        # Environment variables template
+```
+
+---
+
+## ⚙️ Local Development (Manual Setup)
+
+### Prerequisites
+* **Node.js 18+**
+* **MongoDB** (Local instance or Atlas)
+
+### Environment Configuration
+Create a `.env` file in the root directory based on `.env.example`:
+
+| Variable | Description | Default Value |
+| :--- | :--- | :--- |
+| `PORT` | Backend server port | `8080` |
+| `MONGO_URI` | MongoDB connection string | `mongodb://localhost:27017/todoapp` |
+| `VITE_API_URL` | Backend API URL for the frontend | `http://localhost:8080` |
+
+### Installation & Execution
+1. **Install dependencies for all packages:**
+   ```bash
+   npm run install:all
+   ```
+2. **Run in development mode:**
+   ```bash
+   npm run dev:all
+   ```
+   *This will concurrently start MongoDB (via Docker if configured), the Backend API, and the Frontend dev server with Hot Module Replacement (HMR).*
+
+---
+
+## 🧪 Testing
+
+To run the backend integration tests:
+```bash
 cd server
 npm test
-Technologies Used
-Backend
+```
 
-Node.js
-TypeScript
-Express
-MongoDB
-Frontend
-React
-TypeScript
-Vite
-Infrastructure
-Docker
-Docker Compose
-Testing
-Vitest
-Supertest
+---
 
-## Project Status
+## 📈 Project Roadmap
 
-This project is actively evolving as part of my learning journey.
-Future improvements may include:
-improved test coverage
-CI/CD
-deployment
-improved architecture
+This project is actively evolving. Future updates will include:
+* [ ] Frontend unit and component testing.
+* [ ] CI/CD pipeline setup (GitHub Actions).
+* [ ] User Authentication (JWT/Auth0).
+* [ ] Deployment to a cloud provider.
 
-## License
+---
 
-This project is created for educational purposes.
+## 📄 License
+
+Created for educational purposes. Feel free to use it for your own learning!
