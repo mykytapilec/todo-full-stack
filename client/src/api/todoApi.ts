@@ -1,7 +1,12 @@
 import axios from 'axios';
 import { ApiTodo, CreateTodoRequest, UpdateTodoRequest } from '@shared/types/api';
 
-const api = axios.create({ baseURL: '/api/todos', headers: { 'Content-Type': 'application/json' } });
+const baseURL = import.meta.env.VITE_API_URL || '/api/todos';
+
+const api = axios.create({
+  baseURL,
+  headers: { 'Content-Type': 'application/json' },
+});
 
 export const todoApi = {
   filterTodos: async (params?: { query?: string; status?: 'pending' | 'completed' | 'deleted' }): Promise<ApiTodo[]> => {
