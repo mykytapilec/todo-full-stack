@@ -5,6 +5,7 @@ import { Server } from 'http';
 import swaggerUi from 'swagger-ui-express';
 import { Database } from './config/database';
 import { createTodoRoutes } from './routes/todoRoutes';
+import healthRoutes from './routes/healthRoutes';
 import { TodoController } from './controllers/todoController';
 import { TodoService } from './services/todoService';
 import { TodoRepository } from './repositories/todoRepository';
@@ -30,6 +31,13 @@ export class TodoApplication {
     );
 
     this.app.use(express.json());
+
+    this.app.get('/health', (_req: Request, res: Response) => {
+      res.status(200).json({
+        status: 'ok',
+        timestamp: new Date().toISOString(),
+      });
+    });
 
     this.app.use(
       OpenApiValidator.middleware({
