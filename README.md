@@ -1,106 +1,121 @@
-# Todo Full-Stack Application
+# 🚀 Todo Full-Stack Application
 
-A modern full-stack **todo application** with a Node.js TypeScript backend and a React TypeScript frontend.
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 
-This repository is a **personal pet project** created for learning and experimenting with modern full-stack technologies.
+A modern full-stack application for task management. This project was created as a personal pet project to experiment with microservices architecture, strict typing, and containerization.
+
+---
+
+## ⚡ Quick Start (Docker)
+
+The fastest way to get the entire stack up and running:
+
+```bash
+# Copy environment variables template
+cp .env.example .env
+
+# Build and start containers
+docker compose up --build
+```
+
+**The application will be available at:**
+* **Frontend:** [http://localhost:3000](http://localhost:3000)
+* **Backend API:** [http://localhost:8080](http://localhost:8080)
+
+---
+
+## 🛠 Tech Stack
+
+| Layer | Technologies |
+| :--- | :--- |
+| **Frontend** | React, TypeScript, Vite |
+| **Backend** | Node.js, Express, TypeScript |
+| **Database** | MongoDB |
+| **DevOps** | Docker, Docker Compose |
+| **Testing** | Vitest, Supertest |
 
 ---
 
 ## 🎯 Project Goals
 
-The main goals of this project are to:
-
-- Practice real-world full-stack development
-- Improve TypeScript usage on both frontend and backend
-- Experiment with architecture, tooling, and best practices
-- Gradually refactor and enhance the codebase as new concepts are learned
-- Use the project as a long-term learning playground rather than a production-ready app
+* **Real-world Practice:** Mastering the interaction between a React client and a Node.js server.
+* **Type Safety:** Leveraging TypeScript extensively across both frontend and backend.
+* **Architecture:** Experimenting with clean architecture and monorepo patterns.
+* **Learning Playground:** A long-term project for testing new tools, refactoring, and continuous improvement.
 
 ---
 
-## Project Structure
+## 📂 Project Structure
 
-This project is organized as a monorepo with separate frontend and backend applications:
+This project is organized as a monorepo with separate services:
 
-```
-server/                 # Backend application
-├── src/               # Source code
-├── tests/             # Integration tests
-├── package.json       # Backend dependencies
-├── Dockerfile         # Backend container
-└── ...               # Other backend files
-client/                # Frontend application
-├── src/               # React TypeScript source code
-├── package.json       # Frontend dependencies
-└── ...               # Other frontend files
-README.md              # This file
-docker-compose.yml     # Container orchestration
-.env.example          # Environment variables template
+```text
+├── server/             # Backend: Express API
+│   ├── src/            # Source code
+│   ├── tests/          # Integration tests
+│   └── Dockerfile      # Backend container configuration
+├── client/             # Frontend: React Application
+│   ├── src/            # UI components and logic
+│   └── Dockerfile      # Frontend container configuration
+├── shared/             # Shared types (DTOs) used by both apps
+├── docker-compose.yml  # Main Docker setup
+└── .env.example        # Environment variables template
 ```
 
-## Prerequisites
+---
 
-- Node.js (version 18 or higher)
-- npm or yarn
-- MongoDB (for local development) or Docker
+## ⚙️ Local Development (Manual Setup)
 
-## Installation
+### Prerequisites
+* **Node.js 18+**
+* **MongoDB** (Local instance or Atlas)
 
-1. Clone the repository
-2. Install dependencies for both server and client:
+### Environment Configuration
+Create a `.env` file in the root directory based on `.env.example`:
+
+| Variable | Description | Default Value |
+| :--- | :--- | :--- |
+| `PORT` | Backend server port | `8080` |
+| `MONGO_URI` | MongoDB connection string | `mongodb://localhost:27017/todoapp` |
+| `VITE_API_URL` | Backend API URL for the frontend | `http://localhost:8080` |
+
+### Installation & Execution
+1. **Install dependencies for all packages:**
    ```bash
    npm run install:all
    ```
-   
-   Or manually:
+2. **Run in development mode:**
    ```bash
-   # Install server dependencies
-   cd server
-   npm install
-   
-   # Install client dependencies
-   cd ../client
-   npm install
+   npm run dev:all
    ```
+   *This will concurrently start MongoDB (via Docker if configured), the Backend API, and the Frontend dev server with Hot Module Replacement (HMR).*
 
+---
 
-## Build
+## 🧪 Testing
 
-Build both frontend and backend:
-
+To run the backend integration tests:
 ```bash
-npm run build:all
+cd server
+npm test
 ```
 
-Or build individually:
+---
 
-```bash
-npm run build:server  # Build backend
-npm run build:client  # Build frontend
-```
+## 📈 Project Roadmap
 
-## Development
+This project is actively evolving. Future updates will include:
+* [ ] Frontend unit and component testing.
+* [ ] CI/CD pipeline setup (GitHub Actions).
+* [ ] User Authentication (JWT/Auth0).
+* [ ] Deployment to a cloud provider.
 
-### Full Stack Development
+---
 
-Start both the backend API and frontend development server:
+## 📄 License
 
-```bash
-# Terminal 1: Start backend with MongoDB and frontend
-npm run dev:all
-```
-
-Or  start individually:
-
-```bash
-# Terminal 1: Start backend with MongoDB
-npm run dev:backend
-
-# Terminal 2: Start frontend development server
-npm run dev:client
-```
-
-This will:
-1. Start MongoDB container
-2. Run the backend API on `http://localhost:8080`
-3. Run the frontend dev server on `http://localhost:3000` with hot reloading
+Created for educational purposes. Feel free to use it for your own learning!
